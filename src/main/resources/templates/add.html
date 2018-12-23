@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org/" >
+
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/add}" method="post" th:object="${company}">
+        <div class="form-group">
+            <input type="text" th:field="*{id}" hidden/>
+        <p> <label>Nazwa</label>
+            <input type="text" name="name" th:field="*{currentName}" >
+        </p>
+        <p> <label> Ulica</label>
+            <input type="text" name="street" th:field="*{address.street}">
+        </p>
+            <p><label> Numer budynku</label>
+                <input type="text" name="houseNumber" th:field="*{address.houseNumber}" >
+            </p>
+        <p> <label> Numer lokalu</label>
+            <input type="text"  name="flatNumber" th:field="*{address.flatNumber}" >
+        </p>
+            <p>
+            <label> Kod pocztowy</label>
+            <input type="text" name="postalCode" th:field="*{address.postalCode}" >
+            </p>
+       <p>  <label> Miejscowość</label>
+            <input type="text" name="city" th:field="*{address.city}">
+       </p>
+            <p> <label> KRS</label>
+                <input type="text" name="krs" th:field="*{krs}">
+            </p>
+            <p>
+                <label> NIP</label>
+                <input type="text" name="nip" th:field="*{nip}">
+            </p>
+            <p>  <label> REGON</label>
+                <input type="text" name="regon" th:field="*{regon}">
+            </p>
+        </div>
+        <button type="submit" value="Zatwierdź">Zatwierdź</button>
+    </form>
+
+</div>
+<a th:href="@{/companies}">
+    Przejdź do wyszukiwania
+</a>
+</body>
+</html>

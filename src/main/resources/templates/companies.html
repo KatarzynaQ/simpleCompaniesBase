@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Firmy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<form th:action="@{/companies}" method="get">
+    <div class="form-group">
+        <label>Wyszukaj firmę po nazwie</label>
+        <input type="text" name="nameToFind"/>
+    </div>
+    <button type="submit">Wyszukaj</button>
+
+    <a th:href="@{/add}">
+        Dodaj firmę
+    </a>
+</form>
+<div th:each="company: ${findCompanies}" th:object="${company}">
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        <span th:text="${company.currentName}">Firma</span>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <span class="border" th:each="name:${company.names}" th:text="${name}"></span>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Ulica</th>
+                            <th scope="col">Budynek</th>
+                            <th scope="col">Lokal</th>
+                            <th scope="col">Kod pocztowy</th>
+                            <th scope="col">Miejscowość</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${company.address.street}"> x</td>
+                            <td th:text="${company.address.houseNumber}">x</td>
+                            <td th:text="${company.address.flatNumber}">x</td>
+                            <td th:text="${company.address.postalCode}">x</td>
+                            <td th:text="${company.address.city}">x</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">KRS</th>
+                            <th scope="col">NIP</th>
+                            <th scope="col">REGON</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <td th:text="${company.krs}"></td>
+                            <td th:text="${company.nip}"></td>
+                            <td th:text="${company.regon}"></td>
+                        </tbody>
+                    </table>
+
+                    <a th:href="@{/add(companyId=${company.id})}">Edytuj</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
